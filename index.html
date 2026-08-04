@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brackley Jam '26</title>
+
+<style>
+
+  :root{
+    --blue: #1976D2;
+    --blue-dark: #0d47a1;
+    --ink: #0b1220;
+    --paper: #ffffff;
+  }
+
+  *{
+    box-sizing: border-box;
+  }
+
+  html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .stage{
+    position: relative;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  /* Background video */
+  video.bg{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 0;
+    filter: brightness(0.55) saturate(1.1);
+  }
+
+  /* Gradient wash for legibility, heavier at top/bottom */
+  .scrim{
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(11,18,32,0.75) 0%,
+        rgba(11,18,32,0.15) 30%,
+        rgba(11,18,32,0.25) 65%,
+        rgba(11,18,32,0.85) 100%
+      );
+  }
+
+  .content{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 480px;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .logo{
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    margin-top: 12px;
+    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.4));
+  }
+
+  .eyebrow{
+    margin-top: 18px;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #9fc7f0;
+    font-weight: 600;
+  }
+
+  h1{
+    margin: 8px 0 0;
+    font-size: clamp(38px, 11vw, 56px);
+    line-height: 0.98;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  h1 span{
+    display: block;
+    color: var(--blue);
+    -webkit-text-stroke: 1.5px #ffffff;
+  }
+
+  .disciplines{
+    margin-top: 14px;
+    font-size: 15px;
+    color: #d7e6fa;
+    letter-spacing: 0.02em;
+  }
+
+  .dot{
+    color: var(--blue);
+    margin: 0 8px;
+  }
+
+  .cta-block{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 480px;
+    padding: 0 24px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .register-btn{
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    text-align: center;
+    background: var(--blue);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    padding: 18px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(25,118,210,0.45);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .register-btn:active{
+    transform: scale(0.97);
+    box-shadow: 0 4px 14px rgba(25,118,210,0.4);
+  }
+
+  .fb-note{
+    font-size: 13px;
+    color: #b9c8dc;
+    line-height: 1.5;
+    max-width: 340px;
+  }
+
+  .fb-note strong{
+    color: #fff;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    video.bg{
+      display: none;
+    }
+    .stage{
+      background: linear-gradient(160deg, var(--blue-dark), var(--ink) 70%);
+    }
+  }
+
+</style>
+</head>
+
+<body>
+
+  <div class="stage">
+
+    <video
+      class="bg"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      poster="assets/poster.jpg">
+      <source src="assets/hero.mp4" type="video/mp4">
+    </video>
+
+    <div class="scrim"></div>
+
+    <div class="content">
+
+      <img
+        class="logo"
+        src="https://drive.google.com/thumbnail?id=16c2JgNhhnjlgLTM3XSptVcywyd1eJ0cm&sz=w400"
+        alt="Brackley Jam logo">
+
+      <div class="eyebrow">Brackley Jam '26</div>
+
+      <h1>Register<span>Now</span></h1>
+
+      <div class="disciplines">
+        Skateboard <span class="dot">•</span> Scooter <span class="dot">•</span> BMX
+      </div>
+
+    </div>
+
+    <div class="cta-block">
+
+      <a
+        class="register-btn"
+        id="registerLink"
+        href="https://script.google.com/macros/s/AKfycbzAbPL1C-vvuLQPPiLfV_6QJGu8uOH8e_fRLugrvdpvL0CsMyxHlYklBkOsmS_8H15n/exec"
+        target="_blank"
+        rel="noopener">
+        Register Now
+      </a>
+
+      <p class="fb-note" id="fbNote" style="display:none;">
+        <strong>Viewing this in the Facebook app?</strong><br>
+        Tap the ⋯ or ⤴ icon above and choose "Open in Safari" first, then tap Register.
+      </p>
+
+    </div>
+
+  </div>
+
+<script>
+  // Show the Facebook-specific note only when relevant
+  (function () {
+    const ua = navigator.userAgent || navigator.vendor || "";
+    const isFacebookApp = /FBAN|FBAV|Instagram/.test(ua);
+    if (isFacebookApp) {
+      document.getElementById("fbNote").style.display = "block";
+    }
+  })();
+</script>
+
+</body>
+</html>
