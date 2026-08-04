@@ -23,14 +23,15 @@ body{
   background:#fff;
   padding:20px;
   border-radius:12px;
-  box-shadow:0 2px 10px rgba(0,0,0,.1);
+  box-shadow:0 2px 20px rgba(0,0,0,.1);
 }
 
 .header-image{
+ display:block;
   width:100%;
-  display:block;
-  border-radius:12px;
-  margin-bottom:20px;
+  max-width:1000px;
+  height:auto;
+  margin:0 auto 20px auto;
 }
 
 
@@ -85,6 +86,61 @@ button:disabled{
   background: #fff;
   margin-bottom: 10px;
   touch-action: none;
+}
+
+  /* TERMS */
+
+.terms-section{
+  margin:20px 0;
+  
+  padding:15px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  background:#fafafa;
+}
+
+.levelhelp-section{
+  margin:20px 0;
+  padding:15px;
+  font-size:28px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  background:#fafafa;
+}
+
+.terms-text{
+  font-size:20px;
+  line-height:1.6;
+  margin-bottom:15px;
+  text-align:left;
+}
+
+.terms-boxtext{
+  font-size:22px;
+  line-height:1.6;
+  margin-bottom:15px;
+  text-align:left;
+}
+
+.terms-check{
+  display:flex;
+  align-items:flex-start;
+  gap:15px;
+  text-align:left;
+}
+
+.terms-check input[type="checkbox"]{
+  width:32px;
+  height:32px;
+  min-width:32px;
+  min-height:32px;
+  margin-top:4px;
+  flex-shrink:0;
+}
+
+.terms-check strong{
+  font-size:22px;
+  line-height:1.5;
 }
 
 </style>
@@ -182,15 +238,62 @@ button:disabled{
     id="contact"
     placeholder="Emergency Contact">
 
-  <label>
+ <div class="terms-section">
 
-    <input
-      type="checkbox"
-      id="termsAccepted">
+      <div class="terms-text">
 
-    I accept the event terms and conditions.
+        By signing below, I acknowledge that
+        Skateboarding, Scootering, BMX and Inline
+        Skating are inherently risky activities.
 
-  </label>
+        <br><br>
+
+        This event is weather dependant and may be
+        cancelled at any time due to rain,
+        thunderstorms or any other severe weather
+        conditions including Met Office red weather
+        warnings.
+
+        <br><br>
+
+        I agree to release the event organisers,
+        sponsors and venue from liability for any
+        injury, loss or damage arising from
+        participation.
+
+        <br><br>
+
+        If the participant is under 18 years of age,
+        a Parent or Guardian must provide their name
+        and signature above.
+
+      </div>
+
+      <label class="terms-check">
+
+        <input
+          type="checkbox"
+          id="termsAccepted"
+          name="termsAccepted">
+
+        <strong>
+
+          I have read and understood the Terms &
+          Conditions and agree that photographs and
+          video footage may be used for promotional
+          purposes.
+
+          <br><br>
+
+          I understand that registration information
+          may be shared with Brackley Town Council for
+          administration of this event.
+
+        </strong>
+
+      </label>
+
+    </div>
 
   <br><br>
 
