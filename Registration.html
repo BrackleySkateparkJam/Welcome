@@ -336,93 +336,33 @@ if (result.success) {
   const registration =
     result.result;
 
-  document.querySelector(
-    ".container"
-  ).innerHTML = `
+  document.querySelector(".container").innerHTML = `
 
-    <div class="success-card">
+    <h1>
+      ✅ Registration Confirmed
+    </h1>
 
-      <div id="confirmationCard">
+    <p>
+      Competitor Number:
+      <strong>
+        ${registration.competitorNo}
+      </strong>
+    </p>
 
-        thumbnail?id=1bDdZPr-CSgyaRtpX_-jTkOyR4hUACQak&sz=w1000"
-          class="header-image">
+    <button
+      onclick="alert('download button works')">
 
-        <h1>✅ Registration Confirmed</h1>
+      Download Confirmation
 
-        <p>
-          Thank you for registering for
-          <strong>Brackley Jam '26'</strong>.
-        </p>
-
-        <div class="confirmation-details">
-
-          <div>
-            <strong>Competitor Number:</strong>
-            ${registration.competitorNo}
-          </div>
-
-          <div>
-            <strong>Name:</strong>
-            ${registration.name}
-          </div>
-
-          <div>
-            <strong>Age:</strong>
-            ${registration.age}
-          </div>
-
-          <div>
-            <strong>Sport:</strong>
-            ${registration.discipline}
-          </div>
-
-          <div>
-            <strong>Skill Level:</strong>
-            ${registration.level}
-          </div>
-
-          <div>
-            <strong>Parent / Guardian:</strong>
-            ${registration.parent || "N/A"}
-          </div>
-
-          <div>
-            <strong>Emergency Contact:</strong>
-            ${registration.contact || "N/A"}
-          </div>
-
-          <div>
-            <strong>Registered:</strong>
-            ${registration.timestamp}
-          </div>
-
-        </div>
-
-        <h2>
-          Please make a note of your competitor number
-        </h2>
-
-        <div class="competitor-number">
-          ${registration.competitorNo}
-        </div>
-
-      </div>
-
-      <button onclick="downloadConfirmation()">
-        Download Confirmation
-      </button>
-
-    </div>
+    </button>
 
   `;
 
 } else {
 
-    alert(
-      result.message
-    );
+  alert(result.message);
 
-  }
+}
 
   button.disabled = false;
 
