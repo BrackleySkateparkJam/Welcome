@@ -18,12 +18,14 @@ body{
 }
 
 .container{
-  max-width:700px;
-  margin:auto;
+    width:100%;
+  min-height:100vh;
+  max-width:1000px;
+  margin:0 auto;
   background:#fff;
   padding:20px;
   border-radius:12px;
-  box-shadow:0 2px 20px rgba(0,0,0,.1);
+  box-shadow:0 0 20px rgba(0,0,0,.15);
 }
 
 .header-image{
@@ -187,9 +189,7 @@ button:disabled{
       BMX
     </option>
 
-    <option value="Skates">
-      Inline Skates
-    </option>
+
 
   </select>
 
@@ -215,8 +215,9 @@ button:disabled{
   </select>
 
   <input
+       type="text"
     id="parent"
-    placeholder="Parent / Guardian Name">
+       placeholder="Parent / Guardian Name (required if under 18)">
 
   <div class="signature-section">
 
@@ -235,8 +236,9 @@ button:disabled{
 </div>
 
   <input
+     type="tel"
     id="contact"
-    placeholder="Emergency Contact">
+     placeholder="Emergency Contact (Optional)">
 
  <div class="terms-section">
 
