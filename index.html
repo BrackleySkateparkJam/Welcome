@@ -72,7 +72,7 @@
     z-index: 2;
     width: 100%;
     max-width: 480px;
-    padding: 32px 24px;
+    padding: 48px 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -80,15 +80,15 @@
   }
 
   .logo{
-    width: 900px;
-    height: 700px;
+    width: 96px;
+    height: 96px;
     object-fit: contain;
     margin-top: 12px;
     filter: drop-shadow(0 4px 16px rgba(0,0,0,0.4));
   }
 
   .eyebrow{
-    margin-top: 18px;
+    margin-top: 32px;
     font-size: 13px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -97,21 +97,28 @@
   }
 
   h1{
-    margin: 8px 0 0;
+    margin: 18px 0 0;
     font-size: clamp(38px, 11vw, 56px);
     line-height: 0.98;
     font-weight: 800;
     letter-spacing: -0.02em;
   }
 
-  h1 span{
+  h1 .register-link{
     display: block;
     color: var(--blue);
     -webkit-text-stroke: 1.5px #ffffff;
+    text-decoration: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  h1 .register-link:active{
+    opacity: 0.75;
+    transform: scale(0.97);
   }
 
   .disciplines{
-    margin-top: 14px;
+    margin-top: 28px;
     font-size: 15px;
     color: #d7e6fa;
     letter-spacing: 0.02em;
@@ -127,32 +134,10 @@
     z-index: 2;
     width: 100%;
     max-width: 480px;
-    padding: 0 24px 40px;
+    padding: 0 24px 56px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
-  }
-
-  .register-btn{
-    display: block;
-    width: 100%;
-    text-decoration: none;
-    text-align: center;
-    background: var(--blue);
-    color: #fff;
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: 0.01em;
-    padding: 18px 20px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(25,118,210,0.45);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-  }
-
-  .register-btn:active{
-    transform: scale(0.97);
-    box-shadow: 0 4px 14px rgba(25,118,210,0.4);
   }
 
   .fb-note{
@@ -160,6 +145,7 @@
     color: #b9c8dc;
     line-height: 1.5;
     max-width: 340px;
+    margin-top: 4px;
   }
 
   .fb-note strong{
@@ -204,7 +190,12 @@
 
       <div class="eyebrow">Brackley Jam '26</div>
 
-      <h1>Register<span>Now</span></h1>
+      <h1>Register<a
+        class="register-link"
+        id="registerLink"
+        href="https://script.google.com/macros/s/AKfycbzAbPL1C-vvuLQPPiLfV_6QJGu8uOH8e_fRLugrvdpvL0CsMyxHlYklBkOsmS_8H15n/exec"
+        target="_blank"
+        rel="noopener">Now</a></h1>
 
       <div class="disciplines">
         Skateboard <span class="dot">•</span> Scooter <span class="dot">•</span> BMX
@@ -213,15 +204,6 @@
     </div>
 
     <div class="cta-block">
-
-      <a
-        class="register-btn"
-        id="registerLink"
-        href="https://script.google.com/macros/s/AKfycbzAbPL1C-vvuLQPPiLfV_6QJGu8uOH8e_fRLugrvdpvL0CsMyxHlYklBkOsmS_8H15n/exec"
-        target="_blank"
-        rel="noopener">
-        Register Now
-      </a>
 
       <p class="fb-note" id="fbNote" style="display:none;">
         <strong>Viewing this in the Facebook app?</strong><br>
