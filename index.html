@@ -184,16 +184,45 @@
 
   </div>
 
-<!--  <script>
-  // Show the Facebook-specific note only when relevant
+<script>
   (function () {
-    const ua = navigator.userAgent || navigator.vendor || "";
-    const isFacebookApp = /FBAN|FBAV|Instagram/.test(ua);
-    if (isFacebookApp) {
-      document.getElementById("fbNote").style.display = "block";
+    const ua = (navigator.userAgent || navigator.vendor || "").toLowerCase();
+    const isFbApp = ['fb_iab', 'fban', 'fbav', 'instagram'].some(app => ua.includes(app));
+
+    if (!isFbApp) {
+      return; // Normal browser — do nothing special
     }
+
+    // Show the instructional note as the guaranteed manual fallback
+    document.getElementById("fbNote").style.display = "block";
+
+    const link = document.getElementById("registerLink");
+    const targetUrl = link.href;
+
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const isHttps = targetUrl.indexOf("https://") === 0;
+      const bareLink = targetUrl.replace(/^https?:\/\//, "").replace(/^www\./, "");
+
+      // Android: hand off to Chrome via Intent URL
+      window.location.href =
+        "intent://" + bareLink + "#Intent;scheme=" + (isHttps ? "https" : "http") + ";package=com.android.chrome;end";
+
+      // iOS with Chrome installed: hand off via googlechrome(s):// scheme
+      window.location = (isHttps ? "googlechromes://" : "googlechrome://") + bareLink;
+
+      // iOS without Chrome: try the x-safari- prefix as a second attempt
+      window.location = "x-safari-" + targetUrl;
+
+      // If none of the above actually navigated away, fall back to a normal link
+      setTimeout(function () {
+        window.location.href = targetUrl;
+      }, 800);
+    });
+
   })();
-</script> -->>
+</script>
 
 </body>
 </html>
