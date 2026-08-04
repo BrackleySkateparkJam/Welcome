@@ -65,6 +65,25 @@ button:disabled{
   margin-bottom:15px;
 }
 
+  .signature-section {
+  margin-bottom: 20px;
+}
+
+.signature-section strong {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.signaturePad {
+  width: 100%;
+  height: 250px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background: #fff;
+  margin-bottom: 10px;
+  touch-action: none;
+}
+
 </style>
 
 </head>
@@ -140,6 +159,22 @@ button:disabled{
     id="parent"
     placeholder="Parent / Guardian Name">
 
+  <div class="signature-section">
+
+  <strong>
+    Signature
+  </strong>
+
+  <canvas id="signaturePad"></canvas>
+
+  <button
+    type="button"
+    onclick="clearSignature()">
+    Clear Signature
+  </button>
+
+</div>
+
   <input
     id="contact"
     placeholder="Emergency Contact">
@@ -175,7 +210,10 @@ button:disabled{
 
 const API_URL =
   "https://script.google.com/macros/s/AKfycbzAbPL1C-vvuLQPPiLfV_6QJGu8uOH8e_fRLugrvdpvL0CsMyxHlYklBkOsmS_8H15n/exec";
-
+let canvas;
+let ctx;
+let drawing = false;
+  
 async function loadLevels() {
 
   const discipline =
@@ -272,7 +310,145 @@ function showLevelGuide() {
   }
 
 }
+window.onload = function () {
 
+  canvas =
+    document.getElementById(
+      "signaturePad"
+    );
+
+  ctx =
+    canvas.getContext("2d");
+
+  canvas.width =
+    canvas.offsetWidth;
+
+  canvas.height = 250;
+
+  ctx.lineWidth = 3;
+  ctx.lineCap = "round";
+
+  canvas.addEventListener(
+    "mousedown",
+    startDraw
+  );
+
+  canvas.addEventListener(
+    "mousemove",
+    draw
+  );
+
+  canvas.addEventListener(
+    "mouseup",
+    stopDraw
+  );
+
+  canvas.addEventListener(
+    "mouseleave",
+    stopDraw
+  );
+
+  canvas.addEventListener(
+    "touchstart",
+    startTouch
+  );
+
+  canvas.addEventListener(
+    "touchmove",
+    moveTouch
+  );
+
+  canvas.addEventListener(
+    "touchend",
+    stopDraw
+  );
+
+};
+
+function startDraw(e) {
+
+  drawing = true;
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    e.offsetX,
+    e.offsetY
+  );
+
+}
+
+function draw(e) {
+
+  if (!drawing) return;
+
+  ctx.lineTo(
+    e.offsetX,
+    e.offsetY
+  );
+
+  ctx.stroke();
+
+}
+
+function stopDraw() {
+
+  drawing = false;
+
+}
+
+function startTouch(e) {
+
+  e.preventDefault();
+
+  drawing = true;
+
+  const rect =
+    canvas.getBoundingClientRect();
+
+  const touch =
+    e.touches[0];
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    touch.clientX - rect.left,
+    touch.clientY - rect.top
+  );
+
+}
+
+function moveTouch(e) {
+
+  e.preventDefault();
+
+  if (!drawing) return;
+
+  const rect =
+    canvas.getBoundingClientRect();
+
+  const touch =
+    e.touches[0];
+
+  ctx.lineTo(
+    touch.clientX - rect.left,
+    touch.clientY - rect.top
+  );
+
+  ctx.stroke();
+
+}
+
+function clearSignature() {
+
+  ctx.clearRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+}
 async function register() {
 
   const button =
@@ -281,6 +457,32 @@ async function register() {
     );
 
   button.disabled = true;
+
+  const blank =
+    document.createElement(
+      "canvas"
+    );
+
+  blank.width =
+    canvas.width;
+
+  blank.height =
+    canvas.height;
+
+  if (
+    canvas.toDataURL() ===
+    blank.toDataURL()
+  ) {
+
+    alert(
+      "Signature is required."
+    );
+
+    button.disabled = false;
+
+    return;
+
+  }
 
   const response =
     await fetch(API_URL, {
@@ -323,7 +525,10 @@ async function register() {
               "contact"
             ).value,
 
-          signature: ""
+       signature:
+  canvas.toDataURL(
+    "image/png"
+  )
 
         }
 
@@ -453,6 +658,9 @@ function downloadConfirmation() {
           }
         );
 
+      // Preferred path:
+      // native share sheet on mobile
+
       if (
         navigator.canShare &&
         navigator.canShare({
@@ -464,18 +672,55 @@ function downloadConfirmation() {
           files: [file],
           title:
             "Brackley Jam Confirmation"
+        }).catch(function(err) {
+
+          console.log(
+            "Share cancelled or failed:",
+            err
+          );
+
         });
 
         return;
+
       }
+
+      // Fallback:
+      // open image in new tab
 
       const blobUrl =
         URL.createObjectURL(blob);
 
-      window.open(
-        blobUrl,
-        "_blank"
-      );
+      const win =
+        window.open(
+          blobUrl,
+          "_blank"
+        );
+
+      // Popup blocked
+
+      if (!win) {
+
+        const link =
+          document.createElement(
+            "a"
+          );
+
+        link.href =
+          blobUrl;
+
+        link.download =
+          "BrackleyJamConfirmation.png";
+
+        document.body
+          .appendChild(link);
+
+        link.click();
+
+        document.body
+          .removeChild(link);
+
+      }
 
     }, "image/png");
 
