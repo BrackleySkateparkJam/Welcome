@@ -575,7 +575,108 @@ async function register() {
     );
 
   button.disabled = true;
+const name =
+  document.getElementById("name")
+    .value.trim();
 
+const age =
+  document.getElementById("age")
+    .value.trim();
+
+const discipline =
+  document.getElementById(
+    "discipline"
+  ).value;
+
+const level =
+  document.getElementById(
+    "level"
+  ).value;
+
+const parent =
+  document.getElementById(
+    "parent"
+  ).value.trim();
+
+const termsAccepted =
+  document.getElementById(
+    "termsAccepted"
+  ).checked;
+
+if (!name) {
+
+  alert(
+    "Please enter competitor name."
+  );
+
+  button.disabled = false;
+
+  return;
+
+}
+
+if (!age) {
+
+  alert(
+    "Please enter age."
+  );
+
+  button.disabled = false;
+
+  return;
+
+}
+
+if (!discipline) {
+
+  alert(
+    "Please select a sport."
+  );
+
+  button.disabled = false;
+
+  return;
+
+}
+
+if (!level) {
+
+  alert(
+    "Please select a skill level."
+  );
+
+  button.disabled = false;
+
+  return;
+
+}
+
+if (
+  parseInt(age, 10) < 18 &&
+  !parent
+) {
+
+  alert(
+    "Parent / Guardian name is required."
+  );
+
+  button.disabled = false;
+
+  return;
+
+}
+
+if (!termsAccepted) {
+
+  alert(
+    "You must accept the Terms & Conditions."
+  );
+
+  button.disabled = false;
+
+  return;
+
+}
   const blank =
     document.createElement(
       "canvas"
