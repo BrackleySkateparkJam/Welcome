@@ -167,6 +167,10 @@ button:disabled{
   <div id="result"></div>
 
 </div>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvasscript src="https://cdnjs.cloudflare.com/ajax/libs/html2html2canvas.min.js</script>
+
+ 
 
 <script>
 
@@ -426,6 +430,59 @@ if (result.success) {
 
 }
 
+  
+function downloadConfirmation() {
+
+  const card =
+    document.getElementById(
+      "confirmationCard"
+    );
+
+  html2canvas(card, {
+    backgroundColor: "#ffffff",
+    scale: 2
+  }).then(function (canvas) {
+
+    canvas.toBlob(function (blob) {
+
+      const file =
+        new File(
+          [blob],
+          "BrackleyJamConfirmation.png",
+          {
+            type: "image/png"
+          }
+        );
+
+      if (
+        navigator.canShare &&
+        navigator.canShare({
+          files: [file]
+        })
+      ) {
+
+        navigator.share({
+          files: [file],
+          title:
+            "Brackley Jam Confirmation"
+        });
+
+        return;
+      }
+
+      const blobUrl =
+        URL.createObjectURL(blob);
+
+      window.open(
+        blobUrl,
+        "_blank"
+      );
+
+    }, "image/png");
+
+  });
+
+}
 </script>
 
 </body>
