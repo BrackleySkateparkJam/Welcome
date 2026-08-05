@@ -16,7 +16,9 @@ async function loadCompetitors() {
 
   if (!discipline || !level) {
 
-    alert("Select sport and level first.");
+    alert(
+      "Select sport and level first."
+    );
 
     return;
 
@@ -53,22 +55,22 @@ async function loadCompetitors() {
     dropdown.innerHTML =
       '<option value="">Select Competitor</option>';
 
-   if (data.length === 0) {
+    if (data.length === 0) {
 
-  dropdown.innerHTML =
-    '<option value="">No competitors found</option>';
+      dropdown.innerHTML =
+        '<option value="">No competitors found</option>';
 
-  document.getElementById(
-    "loadingOverlay"
-  ).style.display = "none";
+      document.getElementById(
+        "loadingOverlay"
+      ).style.display = "none";
 
-  alert(
-    "No competitors found for this Sport, Level and Run."
-  );
+      alert(
+        "No competitors found for this Sport, Level and Run."
+      );
 
-  return;
+      return;
 
-}
+    }
 
     data.forEach(function(c) {
 
@@ -198,15 +200,10 @@ async function saveScore() {
         API_URL,
         {
           method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
           body: JSON.stringify({
 
-            action: "saveScore",
+            action:
+              "saveScore",
 
             data: {
 
@@ -229,14 +226,29 @@ async function saveScore() {
               run:
                 run,
 
-              judge1: scores[0],
-              judge2: scores[1],
-              judge3: scores[2],
-              judge4: scores[3],
-              judge5: scores[4],
-              judge6: scores[5],
-              judge7: scores[6],
-              judge8: scores[7],
+              judge1:
+                scores[0],
+
+              judge2:
+                scores[1],
+
+              judge3:
+                scores[2],
+
+              judge4:
+                scores[3],
+
+              judge5:
+                scores[4],
+
+              judge6:
+                scores[5],
+
+              judge7:
+                scores[6],
+
+              judge8:
+                scores[7],
 
               totalScore:
                 totalScore
