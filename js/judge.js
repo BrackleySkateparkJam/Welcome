@@ -81,13 +81,13 @@ async function loadCompetitors() {
 
     });
 
-  } catch(error) {
+  } catch (error) {
+
+    console.log(error);
 
     alert(
       "Error loading competitors."
     );
-
-    console.log(error);
 
   }
 
@@ -195,58 +195,59 @@ async function saveScore() {
 
   try {
 
-   const params =
-  new URLSearchParams({
+    const params =
+      new URLSearchParams({
 
-    action: "saveScore",
+        action: "saveScore",
 
-    competitorNo:
-      competitor.no,
+        competitorNo:
+          competitor.no,
 
-    competitorName:
-      competitor.name,
+        competitorName:
+          competitor.name,
 
-    discipline:
-      document.getElementById(
-        "discipline"
-      ).value,
+        discipline:
+          document.getElementById(
+            "discipline"
+          ).value,
 
-    level:
-      document.getElementById(
-        "level"
-      ).value,
+        level:
+          document.getElementById(
+            "level"
+          ).value,
 
-    run:
-      run,
+        run:
+          run,
 
-    judge1: scores[0],
-    judge2: scores[1],
-    judge3: scores[2],
-    judge4: scores[3],
-    judge5: scores[4],
-    judge6: scores[5],
-    judge7: scores[6],
-    judge8: scores[7],
+        judge1: scores[0],
+        judge2: scores[1],
+        judge3: scores[2],
+        judge4: scores[3],
+        judge5: scores[4],
+        judge6: scores[5],
+        judge7: scores[6],
+        judge8: scores[7],
 
-    totalScore:
-      totalScore
+        totalScore:
+          totalScore
 
-  });
+      });
 
-const response =
-  await fetch(
-    API_URL +
-    "?" +
-    params.toString()
-  );
+    const response =
+      await fetch(
+        API_URL +
+        "?" +
+        params.toString()
+      );
 
-const result =
-  await response.json();
+    const result =
+      await response.json();
 
     if (!result.success) {
 
       throw new Error(
-        result.message
+        result.message ||
+        "Unknown error"
       );
 
     }
@@ -289,15 +290,15 @@ const result =
 
     competitors = [];
 
-    loadCompetitors();
+    await loadCompetitors();
 
-  } catch(error) {
+  } catch (error) {
+
+    console.log(error);
 
     alert(
       "Error saving score."
     );
-
-    console.log(error);
 
   }
 
