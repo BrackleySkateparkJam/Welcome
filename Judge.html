@@ -8,7 +8,7 @@
 
   <title>Judge Scoring</title>
 
-  judge.css">
+  <link rel="stylesheet" href="judge.css">
 
 </head>
 
@@ -101,6 +101,8 @@
         <input
           id="j1"
           type="number"
+          min="0"
+          max="10"
           step="0.1"
           placeholder="Judge 1"
           oninput="updateTotal()">
@@ -108,6 +110,8 @@
         <input
           id="j2"
           type="number"
+          min="0"
+          max="10"
           step="0.1"
           placeholder="Judge 2"
           oninput="updateTotal()">
@@ -115,6 +119,8 @@
         <input
           id="j3"
           type="number"
+          min="0"
+          max="10"
           step="0.1"
           placeholder="Judge 3"
           oninput="updateTotal()">
@@ -122,13 +128,17 @@
         <input
           id="j4"
           type="number"
+          min="0"
+          max="10"
           step="0.1"
           placeholder="Judge 4"
           oninput="updateTotal()">
 
-        <input
+                <input
           id="j5"
           type="number"
+          min="0"
+          max="10"
           step="0.1"
           placeholder="Judge 5"
           oninput="updateTotal()">
@@ -136,6 +146,8 @@
         <input
           id="j6"
           type="number"
+          min="0"
+          max="10"
           step="0.1"
           placeholder="Judge 6"
           oninput="updateTotal()">
@@ -143,6 +155,8 @@
         <input
           id="j7"
           type="number"
+          min="0"
+          max="10"
           step="0.1"
           placeholder="Judge 7"
           oninput="updateTotal()">
@@ -150,6 +164,8 @@
         <input
           id="j8"
           type="number"
+          min="0"
+          max="10"
           step="0.1"
           placeholder="Judge 8"
           oninput="updateTotal()">
@@ -172,7 +188,9 @@
 
   </div>
 
-  <div id="loadingOverlay" class="loading-overlay">
+  <div
+    id="loadingOverlay"
+    class="loading-overlay">
 
     <div class="loading-box">
 
