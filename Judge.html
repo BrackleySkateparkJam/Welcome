@@ -1,24 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
 
-<h1>Judge Scoring</h1>
+<head>
 
-<select id="discipline"></select>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<select id="level"></select>
+<title>Judge Scoring</title>
 
-<button onclick="loadCompetitors()">
-  Load Competitors
-</button>
+<ss/judge.css
 
-<select id="competitor"></select>
+</head>
 
-<input id="r1">
-<input id="r2">
-<input id="r3">
+<body>
 
-<button onclick="saveScore()">
-  Save Score
-</button>
+<div class="container">
 
-<div id="result"></div>
+  <h1>Judge Scoring</h1>
 
-/judge.js"></script>
+  <div class="section-box">
+
+    <h2>Competition Filter</h2>
+
+    <select id="discipline">
+
+      <option value="">
+        Choose Sport
+      </option>
+
+      <option value="Skateboard">
+        Skateboard
+      </option>
+
+      <option value="Scooter">
+        Scooter
+      </option>
+
+      <option value="BMX">
+        BMX
+      </option>
+
+      <option value="Skates">
+        Skates
+      </option>
+
+    </select>
+
+    <select id="level">
+
+      <option value="">
+        Choose Level
+      </option>
+
+      <option value="Beginner">
+        Beginner
+      </option>
+
+      <option value="Intermediate">
+        Intermediate
+      </option>
+
+      <option value="Advanced">
+        Advanced
+      </option>
+
+    </select>
+
+    <select id="run">
+
+      <option value="Run 1">
+        Run 1
+      </option>
+
+      <option value="Run 2">
+        Run 2
+      </option>
+
+    </select>
+
+    <button onclick="loadCompetitors()">
+      Load Competitors
+    </button>
+
+  </div>
+
+  <div class="section-box">
+
+    <h2>Score Entry</h2>
+
+    <select id="competitor">
+
+      <option value="">
+        Select Competitor
+      </option>
+
+    </select>
+
+    <input
+      id="j1"
+      type="number"
+      step="0.1"
+      placeholder="Judge 1 Score"
+      oninput="updateTotal()">
+
+    <input
+      id="j2"
+      type="number"
+      step="0.1"
+      placeholder="Judge 2 Score"
+      oninput="updateTotal()">
+
+    <input
+      id="j3"
+      type="number"
+      step="0.1"
+      placeholder="Judge 3 Score"
+      oninput="updateTotal()">
+
+    <input
+      id="j4"
+      type="number"
+      step="0.1"
+      placeholder="Judge 4 Score"
+      oninput="updateTotal()">
+
+    <input
+      id="j5"
+      type="number"
+      step="0.1"
+      placeholder="Judge 5 Score"
+      oninput="updateTotal()">
+
+    <input
+      id="j6"
+      type="number"
+      step="0.1"
+      placeholder="Judge 6 Score"
+      oninput="updateTotal()">
+
+    <input
+      id="j7"
+      type="number"
+      step="0.1"
+      placeholder="Judge 7 Score"
+      oninput="updateTotal()">
+
+    <input
+      id="j8"
+      type="number"
+      step="0.1"
+      placeholder="Judge 8 Score"
+      oninput="updateTotal()">
+
+    <input
+      id="totalScore"
+      type="number"
+      step="0.1"
+      placeholder="Total Score (editable)">
+
+    <button onclick="saveScore()">
+      Save Score
+    </button>
+
+  </div>
+
+  <h2 id="result"></h2>
+
+</div>
+
+<div id="loadingOverlay" class="loading-overlay">
+
+  <div class="loading-box">
+
+    <div class="spinner"></div>
+
+    <div>
+      Loading...
+      
