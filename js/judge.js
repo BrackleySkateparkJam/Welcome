@@ -64,7 +64,31 @@ function loadCompetitors() {
 
     .getCompetitors(discipline, level);
 }
+function updateTotal() {
 
+  let total = 0;
+
+  for (let i = 1; i <= 8; i++) {
+
+    const score =
+      parseFloat(
+        document.getElementById(
+          "j" + i
+        ).value
+      );
+
+    if (!isNaN(score)) {
+      total += score;
+    }
+
+  }
+
+  document.getElementById(
+    "totalScore"
+  ).value =
+    total.toFixed(1);
+
+}
 function saveScore() {
 
   const competitorNo =
