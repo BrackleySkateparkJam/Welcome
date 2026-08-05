@@ -164,13 +164,16 @@
 
       <div class="eyebrow">Brackley Jam '26</div>
 
- <h1>
-  Register
+<h1>
   <a
     class="register-link"
     id="registerLink"
     href="Registration.html">
+
+    Register
+    <br>
     Now
+
   </a>
 </h1>
 
@@ -178,54 +181,13 @@
         Skateboard <span class="dot">•</span> Scooter <span class="dot">•</span> BMX
       </div>
 
-      <p class="fb-note" id="fbNote" style="display:none;">
-        <strong>Viewing this in the Facebook app?</strong><br>
-        Tap the ⋯ or ⤴ icon above and choose "Open in Safari" first, then tap Register.
-      </p>
+
 
     </div>
 
   </div>
 
-<script>
-  (function () {
-    const ua = (navigator.userAgent || navigator.vendor || "").toLowerCase();
-    const isFbApp = ['fb_iab', 'fban', 'fbav', 'instagram'].some(app => ua.includes(app));
 
-    if (!isFbApp) {
-      return; // Normal browser — do nothing special
-    }
-
-    // Show the instructional note as the guaranteed manual fallback
-    document.getElementById("fbNote").style.display = "block";
-
-    const link = document.getElementById("registerLink");
-    const targetUrl = link.href;
-
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      const isHttps = targetUrl.indexOf("https://") === 0;
-      const bareLink = targetUrl.replace(/^https?:\/\//, "").replace(/^www\./, "");
-
-      // Android: hand off to Chrome via Intent URL
-      window.location.href =
-        "intent://" + bareLink + "#Intent;scheme=" + (isHttps ? "https" : "http") + ";package=com.android.chrome;end";
-
-      // iOS with Chrome installed: hand off via googlechrome(s):// scheme
-      window.location = (isHttps ? "googlechromes://" : "googlechrome://") + bareLink;
-
-      // iOS without Chrome: try the x-safari- prefix as a second attempt
-      window.location = "x-safari-" + targetUrl;
-
-      // If none of the above actually navigated away, fall back to a normal link
-      setTimeout(function () {
-        window.location.href = targetUrl;
-      }, 800);
-    });
-
-  })();
-</script>
 
 </body>
 </html>
