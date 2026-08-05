@@ -16,10 +16,7 @@ async function loadCompetitors() {
 
   if (!discipline || !level) {
 
-    alert(
-      "Select sport and level first."
-    );
-
+    alert("Select sport and level first.");
     return;
 
   }
@@ -81,7 +78,7 @@ async function loadCompetitors() {
 
     });
 
-  } catch (error) {
+  } catch(error) {
 
     console.log(error);
 
@@ -101,7 +98,7 @@ function updateTotal() {
 
   let total = 0;
 
-  for (let i = 1; i <= 8; i++) {
+  for (let i = 1; i <= 5; i++) {
 
     const score =
       parseFloat(
@@ -162,9 +159,14 @@ async function saveScore() {
       "run"
     ).value;
 
+  const comment =
+    document.getElementById(
+      "comment"
+    ).value;
+
   const scores = [];
 
-  for (let i = 1; i <= 8; i++) {
+  for (let i = 1; i <= 5; i++) {
 
     scores.push(
       document.getElementById(
@@ -224,9 +226,8 @@ async function saveScore() {
         judge3: scores[2],
         judge4: scores[3],
         judge5: scores[4],
-        judge6: scores[5],
-        judge7: scores[6],
-        judge8: scores[7],
+
+        comment: comment,
 
         totalScore:
           totalScore
@@ -267,18 +268,21 @@ async function saveScore() {
 
     setTimeout(function() {
 
-      resultBox.innerHTML =
-        "";
+      resultBox.innerHTML = "";
 
     }, 3000);
 
-    for (let i = 1; i <= 8; i++) {
+    for (let i = 1; i <= 5; i++) {
 
       document.getElementById(
         "j" + i
       ).value = "";
 
     }
+
+    document.getElementById(
+      "comment"
+    ).value = "";
 
     document.getElementById(
       "totalScore"
@@ -292,7 +296,7 @@ async function saveScore() {
 
     await loadCompetitors();
 
-  } catch (error) {
+  } catch(error) {
 
     console.log(error);
 
