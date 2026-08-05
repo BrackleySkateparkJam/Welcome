@@ -38,29 +38,20 @@ async function loadCompetitors() {
 
     const response =
       await fetch(
-
         API_URL +
-
         "?action=competitors" +
-
         "&discipline=" +
-
         encodeURIComponent(
           discipline
         ) +
-
         "&level=" +
-
         encodeURIComponent(
           level
         ) +
-
         "&run=" +
-
         encodeURIComponent(
           run
         )
-
       );
 
     const data =
@@ -86,7 +77,7 @@ async function loadCompetitors() {
 
     }
 
-    data.forEach(c => {
+    data.forEach(function(c) {
 
       dropdown.innerHTML +=
         `<option value="${c.no}">
@@ -171,11 +162,9 @@ async function saveScore() {
   for (let i = 1; i <= 8; i++) {
 
     scores.push(
-
       document.getElementById(
         "j" + i
       ).value
-
     );
 
   }
@@ -205,19 +194,13 @@ async function saveScore() {
       await fetch(
         API_URL,
         {
-
           method: "POST",
-
           headers: {
             "Content-Type":
               "application/json"
           },
-
           body: JSON.stringify({
-
-            action:
-              "saveScore",
-
+            action: "saveScore",
             data: {
 
               competitorNo:
@@ -264,80 +247,4 @@ async function saveScore() {
                 scores[7],
 
               totalScore:
-                totalScore
-
-            }
-
-          })
-
-        }
-      );
-
-    const result =
-      await response.json();
-
-    document.getElementById(
-      "loadingOverlay"
-    ).style.display = "none";
-
-    if (!result.success) {
-
-      throw new Error(
-        result.message
-      );
-
-    }
-
-    const resultBox =
-      document.getElementById(
-        "result"
-      );
-
-    resultBox.innerHTML =
-      "✅ " +
-      competitor.name +
-      " scored successfully";
-
-    resultBox.style.color =
-      "green";
-
-    setTimeout(function() {
-
-      resultBox.innerHTML =
-        "";
-
-    }, 3000);
-
-    for (let i = 1; i <= 8; i++) {
-
-      document.getElementById(
-        "j" + i
-      ).value = "";
-
-    }
-
-    document.getElementById(
-      "totalScore"
-    ).value = "";
-
-    document.getElementById(
-      "competitor"
-    ).selectedIndex = 0;
-
-    loadCompetitors();
-
-  } catch(error) {
-
-    document.getElementById(
-      "loadingOverlay"
-    ).style.display = "none";
-
-    alert(
-      "Error saving score."
-    );
-
-    console.log(error);
-
-  }
-
-}
+              
