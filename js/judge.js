@@ -195,73 +195,53 @@ async function saveScore() {
 
   try {
 
-    const response =
-      await fetch(
-        API_URL,
-        {
-          method: "POST",
-          body: JSON.stringify({
+   const params =
+  new URLSearchParams({
 
-            action:
-              "saveScore",
+    action: "saveScore",
 
-            data: {
+    competitorNo:
+      competitor.no,
 
-              competitorNo:
-                competitor.no,
+    competitorName:
+      competitor.name,
 
-              competitorName:
-                competitor.name,
+    discipline:
+      document.getElementById(
+        "discipline"
+      ).value,
 
-              discipline:
-                document.getElementById(
-                  "discipline"
-                ).value,
+    level:
+      document.getElementById(
+        "level"
+      ).value,
 
-              level:
-                document.getElementById(
-                  "level"
-                ).value,
+    run:
+      run,
 
-              run:
-                run,
+    judge1: scores[0],
+    judge2: scores[1],
+    judge3: scores[2],
+    judge4: scores[3],
+    judge5: scores[4],
+    judge6: scores[5],
+    judge7: scores[6],
+    judge8: scores[7],
 
-              judge1:
-                scores[0],
+    totalScore:
+      totalScore
 
-              judge2:
-                scores[1],
+  });
 
-              judge3:
-                scores[2],
+const response =
+  await fetch(
+    API_URL +
+    "?" +
+    params.toString()
+  );
 
-              judge4:
-                scores[3],
-
-              judge5:
-                scores[4],
-
-              judge6:
-                scores[5],
-
-              judge7:
-                scores[6],
-
-              judge8:
-                scores[7],
-
-              totalScore:
-                totalScore
-
-            }
-
-          })
-
-        }
-      );
-
-    const result =
-      await response.json();
+const result =
+  await response.json();
 
     if (!result.success) {
 
