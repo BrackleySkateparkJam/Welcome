@@ -1,69 +1,116 @@
-
-<script>
 const API_URL =
   "https://script.google.com/macros/s/AKfycbzAbPL1C-vvuLQPPiLfV_6QJGu8uOH8e_fRLugrvdpvL0CsMyxHlYklBkOsmS_8H15n/exec";
+
 let competitors = [];
 
-function loadCompetitors() {
+async function loadCompetitors() {
 
   const discipline =
-    document.getElementById("discipline").value;
+    document.getElementById(
+      "discipline"
+    ).value;
 
   const level =
-    document.getElementById("level").value;
+    document.getElementById(
+      "level"
+    ).value;
+
+  const run =
+    document.getElementById(
+      "run"
+    ).value;
 
   if (!discipline || !level) {
-    alert("Select sport and level first.");
+
+    alert(
+      "Select sport and level first."
+    );
+
     return;
+
   }
 
-  document.getElementById("loadingOverlay").style.display = "flex";
+  document.getElementById(
+    "loadingOverlay"
+  ).style.display = "flex";
 
-  google.script.run
+  try {
 
-    .withSuccessHandler(function(data) {
+    const response =
+      await fetch(
 
-      document.getElementById("loadingOverlay").style.display = "none";
+        API_URL +
 
-      competitors = data;
+        "?action=competitors" +
 
-      const dropdown =
-        document.getElementById("competitor");
+        "&discipline=" +
+
+        encodeURIComponent(
+          discipline
+        ) +
+
+        "&level=" +
+
+        encodeURIComponent(
+          level
+        ) +
+
+        "&run=" +
+
+        encodeURIComponent(
+          run
+        )
+
+      );
+
+    const data =
+      await response.json();
+
+    competitors =
+      data;
+
+    const dropdown =
+      document.getElementById(
+        "competitor"
+      );
+
+    dropdown.innerHTML =
+      '<option value="">Select Competitor</option>';
+
+    if (data.length === 0) {
 
       dropdown.innerHTML =
-        '<option value="">Select Competitor</option>';
+        '<option value="">No competitors found</option>';
 
-      if (data.length === 0) {
+      return;
 
-        dropdown.innerHTML =
-          '<option value="">No competitors found</option>';
+    }
 
-        return;
-      }
+    data.forEach(c => {
 
-      data.forEach(c => {
+      dropdown.innerHTML +=
+        `<option value="${c.no}">
+          ${c.no} - ${c.name}
+        </option>`;
 
-        dropdown.innerHTML +=
-          `<option value="${c.no}">
-            ${c.no} - ${c.name}
-          </option>`;
+    });
 
-      });
+  } catch(error) {
 
-    })
+    alert(
+      "Error loading competitors."
+    );
 
-    .withFailureHandler(function(error) {
+    console.log(error);
 
-      document.getElementById("loadingOverlay").style.display = "none";
+  }
 
-      alert("Error loading competitors.");
+  document.getElementById(
+    "loadingOverlay"
+  ).style.display = "none";
 
-      console.log(error);
-
-    })
-
-    .getCompetitors(discipline, level);
 }
+
 function updateTotal() {
 
   let total = 0;
@@ -78,7 +125,9 @@ function updateTotal() {
       );
 
     if (!isNaN(score)) {
+
       total += score;
+
     }
 
   }
@@ -89,92 +138,206 @@ function updateTotal() {
     total.toFixed(1);
 
 }
-function saveScore() {
+
+async function saveScore() {
 
   const competitorNo =
-    document.getElementById("competitor").value;
+    document.getElementById(
+      "competitor"
+    ).value;
 
   if (!competitorNo) {
-    alert("Please select a competitor.");
+
+    alert(
+      "Please select a competitor."
+    );
+
     return;
-  }
 
-  const r1 =
-    document.getElementById("r1").value;
-
-  const r2 =
-    document.getElementById("r2").value;
-
-  const r3 =
-    document.getElementById("r3").value;
-
-  if (!r1 || !r2 || !r3) {
-    alert("Please enter all three scores.");
-    return;
   }
 
   const competitor =
-    competitors.find(x => x.no === competitorNo);
+    competitors.find(
+      x => x.no === competitorNo
+    );
 
-  document.getElementById("loadingOverlay").style.display = "flex";
+  const run =
+    document.getElementById(
+      "run"
+    ).value;
 
-  google.script.run
+  const scores = [];
 
-    .withSuccessHandler(function() {
+  for (let i = 1; i <= 8; i++) {
 
-      document.getElementById("loadingOverlay").style.display = "none";
+    scores.push(
 
-      const result =
-        document.getElementById("result");
+      document.getElementById(
+        "j" + i
+      ).value
 
-      result.innerHTML =
-        "✅ " + competitor.name + " scored successfully";
+    );
 
-      result.style.color = "green";
+  }
 
-      setTimeout(function() {
+  const totalScore =
+    document.getElementById(
+      "totalScore"
+    ).value;
 
-        result.innerHTML = "";
+  if (!totalScore) {
 
-      }, 3000);
+    alert(
+      "Please enter scores."
+    );
 
-      document.getElementById("r1").value = "";
-      document.getElementById("r2").value = "";
-      document.getElementById("r3").value = "";
+    return;
 
-      document.getElementById("competitor").selectedIndex = 0;
+  }
 
-      loadCompetitors();
+  document.getElementById(
+    "loadingOverlay"
+  ).style.display = "flex";
 
-    })
+  try {
 
-    .withFailureHandler(function(error) {
+    const response =
+      await fetch(
+        API_URL,
+        {
 
-      document.getElementById("loadingOverlay").style.display = "none";
+          method: "POST",
 
-      alert("Error saving score.");
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
 
-      console.log(error);
+          body: JSON.stringify({
 
-    })
+            action:
+              "saveScore",
 
-    .saveScore({
+            data: {
 
-      competitorNo: competitor.no,
+              competitorNo:
+                competitor.no,
 
-      competitorName: competitor.name,
+              competitorName:
+                competitor.name,
 
-      discipline:
-        document.getElementById("discipline").value,
+              discipline:
+                document.getElementById(
+                  "discipline"
+                ).value,
 
-      level:
-        document.getElementById("level").value,
+              level:
+                document.getElementById(
+                  "level"
+                ).value,
 
-      r1: r1,
-      r2: r2,
-      r3: r3
+              run:
+                run,
 
-    });
+              judge1:
+                scores[0],
+
+              judge2:
+                scores[1],
+
+              judge3:
+                scores[2],
+
+              judge4:
+                scores[3],
+
+              judge5:
+                scores[4],
+
+              judge6:
+                scores[5],
+
+              judge7:
+                scores[6],
+
+              judge8:
+                scores[7],
+
+              totalScore:
+                totalScore
+
+            }
+
+          })
+
+        }
+      );
+
+    const result =
+      await response.json();
+
+    document.getElementById(
+      "loadingOverlay"
+    ).style.display = "none";
+
+    if (!result.success) {
+
+      throw new Error(
+        result.message
+      );
+
+    }
+
+    const resultBox =
+      document.getElementById(
+        "result"
+      );
+
+    resultBox.innerHTML =
+      "✅ " +
+      competitor.name +
+      " scored successfully";
+
+    resultBox.style.color =
+      "green";
+
+    setTimeout(function() {
+
+      resultBox.innerHTML =
+        "";
+
+    }, 3000);
+
+    for (let i = 1; i <= 8; i++) {
+
+      document.getElementById(
+        "j" + i
+      ).value = "";
+
+    }
+
+    document.getElementById(
+      "totalScore"
+    ).value = "";
+
+    document.getElementById(
+      "competitor"
+    ).selectedIndex = 0;
+
+    loadCompetitors();
+
+  } catch(error) {
+
+    document.getElementById(
+      "loadingOverlay"
+    ).style.display = "none";
+
+    alert(
+      "Error saving score."
+    );
+
+    console.log(error);
+
+  }
+
 }
-
-</script>
