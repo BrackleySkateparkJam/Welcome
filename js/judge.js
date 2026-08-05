@@ -6,25 +6,17 @@ let competitors = [];
 async function loadCompetitors() {
 
   const discipline =
-    document.getElementById(
-      "discipline"
-    ).value;
+    document.getElementById("discipline").value;
 
   const level =
-    document.getElementById(
-      "level"
-    ).value;
+    document.getElementById("level").value;
 
   const run =
-    document.getElementById(
-      "run"
-    ).value;
+    document.getElementById("run").value;
 
   if (!discipline || !level) {
 
-    alert(
-      "Select sport and level first."
-    );
+    alert("Select sport and level first.");
 
     return;
 
@@ -41,24 +33,17 @@ async function loadCompetitors() {
         API_URL +
         "?action=competitors" +
         "&discipline=" +
-        encodeURIComponent(
-          discipline
-        ) +
+        encodeURIComponent(discipline) +
         "&level=" +
-        encodeURIComponent(
-          level
-        ) +
+        encodeURIComponent(level) +
         "&run=" +
-        encodeURIComponent(
-          run
-        )
+        encodeURIComponent(run)
       );
 
     const data =
       await response.json();
 
-    competitors =
-      data;
+    competitors = data;
 
     const dropdown =
       document.getElementById(
@@ -152,6 +137,16 @@ async function saveScore() {
       x => x.no === competitorNo
     );
 
+  if (!competitor) {
+
+    alert(
+      "Competitor not found."
+    );
+
+    return;
+
+  }
+
   const run =
     document.getElementById(
       "run"
@@ -164,7 +159,7 @@ async function saveScore() {
     scores.push(
       document.getElementById(
         "j" + i
-      ).value
+      ).value || 0
     );
 
   }
@@ -195,12 +190,16 @@ async function saveScore() {
         API_URL,
         {
           method: "POST",
+
           headers: {
             "Content-Type":
               "application/json"
           },
+
           body: JSON.stringify({
+
             action: "saveScore",
+
             data: {
 
               competitorNo:
@@ -222,29 +221,88 @@ async function saveScore() {
               run:
                 run,
 
-              judge1:
-                scores[0],
-
-              judge2:
-                scores[1],
-
-              judge3:
-                scores[2],
-
-              judge4:
-                scores[3],
-
-              judge5:
-                scores[4],
-
-              judge6:
-                scores[5],
-
-              judge7:
-                scores[6],
-
-              judge8:
-                scores[7],
+              judge1: scores[0],
+              judge2: scores[1],
+              judge3: scores[2],
+              judge4: scores[3],
+              judge5: scores[4],
+              judge6: scores[5],
+              judge7: scores[6],
+              judge8: scores[7],
 
               totalScore:
-              
+                totalScore
+
+            }
+
+          })
+
+        }
+      );
+
+    const result =
+      await response.json();
+
+    if (!result.success) {
+
+      throw new Error(
+        result.message
+      );
+
+    }
+
+    const resultBox =
+      document.getElementById(
+        "result"
+      );
+
+    resultBox.innerHTML =
+      "✅ " +
+      competitor.name +
+      " scored successfully";
+
+    resultBox.style.color =
+      "green";
+
+    setTimeout(function() {
+
+      resultBox.innerHTML =
+        "";
+
+    }, 3000);
+
+    for (let i = 1; i <= 8; i++) {
+
+      document.getElementById(
+        "j" + i
+      ).value = "";
+
+    }
+
+    document.getElementById(
+      "totalScore"
+    ).value = "";
+
+    document.getElementById(
+      "competitor"
+    ).selectedIndex = 0;
+
+    competitors = [];
+
+    loadCompetitors();
+
+  } catch(error) {
+
+    alert(
+      "Error saving score."
+    );
+
+    console.log(error);
+
+  }
+
+  document.getElementById(
+    "loadingOverlay"
+  ).style.display = "none";
+
+}
