@@ -156,4 +156,28 @@ button:disabled{
   line-height:1.5;
 }
 
+.success-card{
+  background:#fff;
+  padding:30px;
+  border-radius:12px;
+  text-align:center;
+}
+
+.confirmation-details{
+  text-align:left;
+  margin:20px 0;
+}
+
+.confirmation-details div{
+  padding:8px 0;
+  border-bottom:1px solid #eee;
+}
+
+.competitor-number{
+  font-size:48px;
+  font-weight:bold;
+  color:#1976d2;
+  margin:20px 0;
+}
+
 
