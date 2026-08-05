@@ -26,7 +26,7 @@ body{
 body{
   font-family:Arial,sans-serif;
   background:#f2f2f2;
-  font-size:28px;
+  font-size:20px;
 }
 
 .container{
@@ -46,14 +46,18 @@ body{
   margin:0 auto 20px auto;
 }
 
-
+h1{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:20px;
+}
 
   input,
 select{
  width:100%;
   padding:15px;
   margin-bottom:15px;
-  font-size:24px;
+  font-size:18px;
   border:1px solid #ccc;
   border-radius:10px;
   background:#fff;
@@ -114,21 +118,21 @@ button:disabled{
 .levelhelp-section{
   margin:20px 0;
   padding:15px;
-  font-size:28px;
+  font-size:22px;
   border:1px solid #ddd;
   border-radius:8px;
   background:#fafafa;
 }
 
 .terms-text{
-  font-size:18px;
+  font-size:12px;
   line-height:1.6;
   margin-bottom:15px;
   text-align:left;
 }
 
 .terms-boxtext{
-  font-size:18px;
+  font-size:12px;
   line-height:1.6;
   margin-bottom:15px;
   text-align:left;
@@ -142,16 +146,16 @@ button:disabled{
 }
 
 .terms-check input[type="checkbox"]{
-  width:32px;
-  height:32px;
-  min-width:32px;
-  min-height:32px;
+  width:26px;
+  height:26px;
+  min-width:26px;
+  min-height:26px;
   margin-top:4px;
   flex-shrink:0;
 }
 
 .terms-check strong{
-  font-size:20px;
+  font-size:12px;
   line-height:1.5;
 }
 
@@ -163,10 +167,14 @@ button:disabled{
 
 <div class="container">
 
-  <img
+ <!-- <img
     class="header-image"
     src="https://drive.google.com/thumbnail?id=16c2JgNhhnjlgLTM3XSptVcywyd1eJ0cm&sz=w1000"
-    alt="Brackley Jam">
+    alt="Brackley Jam"> -->
+  <img
+  class="header-image"
+  src="assets/header logo.png"
+ alt="Brackley Jam">
 
   <h1>Registration</h1>
 
@@ -385,12 +393,12 @@ async function loadLevels() {
 
 function showLevelGuide() {
 
-  const sport =
+  const discipline =
     document.getElementById(
       "discipline"
     ).value;
 
-  const box =
+  const guide =
     document.getElementById(
       "levelGuide"
     );
@@ -400,34 +408,214 @@ function showLevelGuide() {
       "levelGuideContent"
     );
 
-  box.style.display = "block";
+  if (!discipline) {
 
-  if (sport === "Scooter") {
+    guide.style.display =
+      "none";
 
-    content.innerHTML = `
-      <h3>🛴 Scooter</h3>
+    return;
 
-      <strong>Beginner</strong>
-      <p>
-      Ride confidently around the park,
-      Bunny Hop, Manual, 180.
-      </p>
+  }
 
-      <strong>Intermediate</strong>
-      <p>
-      Tailwhips, Barspins,
-      Boardslides, Transfers.
-      </p>
+  guide.style.display =
+    "block";
 
-      <strong>Advanced</strong>
-      <p>
-      Double Whips, Bri Flips,
-      Flairs and technical combinations.
-      </p>
-    `;
+  switch (discipline) {
+
+    case "Scooter":
+
+      content.innerHTML = `
+
+        <h3>🛴 Scooter</h3>
+
+        <p>
+          <strong>Beginner</strong><br>
+          Comfortable riding around the park and learning fundamental tricks.
+        </p>
+
+        <p>
+          • Ride confidently around the park<br>
+          • Drop in on banks or small ramps<br>
+          • Bunny Hop<br>
+          • Manual<br>
+          • 180<br>
+          • Ride small boxes or banks
+        </p>
+
+        <hr>
+
+        <p>
+          <strong>Intermediate</strong><br>
+          Confident on most park features and linking tricks together.
+        </p>
+
+        <p>
+          • Quarter pipe drop-in<br>
+          • Tailwhip and/or Barspin<br>
+          • 360<br>
+          • Feeble, Smith or Boardslide<br>
+          • Airs on quarters<br>
+          • Ramp transfers<br>
+          • Consistent trick combinations
+        </p>
+
+        <hr>
+
+        <p>
+          <strong>Advanced</strong><br>
+          Highly confident on all obstacles with technical tricks, style and consistency.
+        </p>
+
+        <p>
+          • Double Tailwhip<br>
+          • Bri Flip<br>
+          • Fingerwhip<br>
+          • Flair<br>
+          • 540+<br>
+          • Whip Rewind<br>
+          • Large airs with grabs<br>
+          • Technical rail combinations
+        </p>
+
+        <p>
+          <strong>Important:</strong><br>
+          These examples are a guide only.
+        </p>
+
+      `;
+
+      break;
+
+    case "BMX":
+
+      content.innerHTML = `
+
+        <h3>🚲 BMX</h3>
+
+        <p>
+          <strong>Beginner</strong><br>
+          Comfortable riding around the park and learning basic BMX skills.
+        </p>
+
+        <p>
+          • Pump transitions<br>
+          • Bunny Hop<br>
+          • Manual<br>
+          • 180<br>
+          • Ride boxes and banks<br>
+          • Small drop-ins
+        </p>
+
+        <hr>
+
+        <p>
+          <strong>Intermediate</strong><br>
+          Confident on all park features and beginning technical tricks.
+        </p>
+
+        <p>
+          • Quarter pipe drop-in<br>
+          • 360<br>
+          • Barspin<br>
+          • Tailwhip (if applicable)<br>
+          • Smith or Feeble Grind<br>
+          • Basic airs<br>
+          • Transfer between ramps
+        </p>
+
+        <hr>
+
+        <p>
+          <strong>Advanced</strong><br>
+          Experienced rider performing technical tricks consistently.
+        </p>
+
+        <p>
+          • Backflip<br>
+          • Flair<br>
+          • 540+<br>
+          • Truck Driver<br>
+          • Tailwhip<br>
+          • Double Peg Grinds<br>
+          • Technical rail combinations<br>
+          • Large airs with grabs
+        </p>
+
+      `;
+
+      break;
+
+    case "Skateboard":
+
+      content.innerHTML = `
+
+        <h3>🛹 Skateboard</h3>
+
+        <p>
+          <strong>Beginner</strong><br>
+          Comfortable riding and learning the fundamentals.
+        </p>
+
+        <p>
+          • Push and carve confidently<br>
+          • Drop in on banks<br>
+          • Ollie<br>
+          • Shuvit<br>
+          • Ride boxes or banks<br>
+          • Small 180s
+        </p>
+
+        <hr>
+
+        <p>
+          <strong>Intermediate</strong><br>
+          Confident on most obstacles and able to link tricks together.
+        </p>
+
+        <p>
+          • Quarter pipe drop-in<br>
+          • Kickflip<br>
+          • Heelflip<br>
+          • 360 Shuvit<br>
+          • 50-50 Grind<br>
+          • Boardslide<br>
+          • Small airs<br>
+          • Ramp transfers
+        </p>
+
+        <hr>
+
+        <p>
+          <strong>Advanced</strong><br>
+          Highly skilled rider with technical flip tricks and grinds.
+        </p>
+
+        <p>
+          • Tre Flip<br>
+          • Hardflip<br>
+          • Laser Flip<br>
+          • Smith Grind<br>
+          • Crooked Grind<br>
+          • Bigspin<br>
+          • 540s (Vert)<br>
+          • Large airs with grabs
+        </p>
+
+      `;
+
+
+      break;
+
+    default:
+
+      guide.style.display = "none";
+
+      break;
+
   }
 
 }
+
 window.onload = function () {
 
   canvas =
@@ -769,10 +957,11 @@ if (result.success) {
 
       <div id="confirmationCard">
 
-        <img
-          src="https://drive.google.com/thumbnail?id=1bDdZPr-CSgyaRtpX_-jTkOyR4hUACQak&sz=w1000"
-          alt="Brackley Jam Banner"
-          class="header-image">
+
+            <img
+  class="header-image"
+  src="assets/header logo.png"
+ alt="Brackley Jam">
 
         <h1>✅ Registration Confirmed</h1>
 
