@@ -53,14 +53,22 @@ async function loadCompetitors() {
     dropdown.innerHTML =
       '<option value="">Select Competitor</option>';
 
-    if (data.length === 0) {
+   if (data.length === 0) {
 
-      dropdown.innerHTML =
-        '<option value="">No competitors found</option>';
+  dropdown.innerHTML =
+    '<option value="">No competitors found</option>';
 
-      return;
+  document.getElementById(
+    "loadingOverlay"
+  ).style.display = "none";
 
-    }
+  alert(
+    "No competitors found for this Sport, Level and Run."
+  );
+
+  return;
+
+}
 
     data.forEach(function(c) {
 
