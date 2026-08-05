@@ -3,177 +3,193 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Judge Scoring</title>
+  <title>Judge Scoring</title>
 
-<ss/judge.css
+  judge.css">
 
 </head>
 
 <body>
 
-<div class="container">
+  <div class="container">
 
-  <h1>Judge Scoring</h1>
+    <h1>Judge Scoring</h1>
 
-  <div class="section-box">
+    <div class="section-box">
 
-    <h2>Competition Filter</h2>
+      <h2>Competition Filter</h2>
 
-    <select id="discipline">
+      <select id="discipline">
 
-      <option value="">
-        Choose Sport
-      </option>
+        <option value="">
+          Choose Sport
+        </option>
 
-      <option value="Skateboard">
-        Skateboard
-      </option>
+        <option value="Skateboard">
+          Skateboard
+        </option>
 
-      <option value="Scooter">
-        Scooter
-      </option>
+        <option value="Scooter">
+          Scooter
+        </option>
 
-      <option value="BMX">
-        BMX
-      </option>
+        <option value="BMX">
+          BMX
+        </option>
 
-      <option value="Skates">
-        Skates
-      </option>
+        <option value="Skates">
+          Inline Skates
+        </option>
 
-    </select>
+      </select>
 
-    <select id="level">
+      <select id="level">
 
-      <option value="">
-        Choose Level
-      </option>
+        <option value="">
+          Choose Level
+        </option>
 
-      <option value="Beginner">
-        Beginner
-      </option>
+        <option value="Beginner">
+          Beginner
+        </option>
 
-      <option value="Intermediate">
-        Intermediate
-      </option>
+        <option value="Intermediate">
+          Intermediate
+        </option>
 
-      <option value="Advanced">
-        Advanced
-      </option>
+        <option value="Advanced">
+          Advanced
+        </option>
 
-    </select>
+      </select>
 
-    <select id="run">
+      <select id="run">
 
-      <option value="Run 1">
-        Run 1
-      </option>
+        <option value="Run1">
+          Run 1
+        </option>
 
-      <option value="Run 2">
-        Run 2
-      </option>
+        <option value="Run2">
+          Run 2
+        </option>
 
-    </select>
+      </select>
 
-    <button onclick="loadCompetitors()">
-      Load Competitors
-    </button>
+      <button onclick="loadCompetitors()">
+        Load Competitors
+      </button>
+
+    </div>
+
+    <div class="section-box">
+
+      <h2>Score Entry</h2>
+
+      <select id="competitor">
+
+        <option value="">
+          Select Competitor
+        </option>
+
+      </select>
+
+      <div class="score-grid">
+
+        <input
+          id="j1"
+          type="number"
+          step="0.1"
+          placeholder="Judge 1"
+          oninput="updateTotal()">
+
+        <input
+          id="j2"
+          type="number"
+          step="0.1"
+          placeholder="Judge 2"
+          oninput="updateTotal()">
+
+        <input
+          id="j3"
+          type="number"
+          step="0.1"
+          placeholder="Judge 3"
+          oninput="updateTotal()">
+
+        <input
+          id="j4"
+          type="number"
+          step="0.1"
+          placeholder="Judge 4"
+          oninput="updateTotal()">
+
+        <input
+          id="j5"
+          type="number"
+          step="0.1"
+          placeholder="Judge 5"
+          oninput="updateTotal()">
+
+        <input
+          id="j6"
+          type="number"
+          step="0.1"
+          placeholder="Judge 6"
+          oninput="updateTotal()">
+
+        <input
+          id="j7"
+          type="number"
+          step="0.1"
+          placeholder="Judge 7"
+          oninput="updateTotal()">
+
+        <input
+          id="j8"
+          type="number"
+          step="0.1"
+          placeholder="Judge 8"
+          oninput="updateTotal()">
+
+      </div>
+
+      <input
+        id="totalScore"
+        type="number"
+        step="0.1"
+        placeholder="Total Score (editable)">
+
+      <button onclick="saveScore()">
+        Save Score
+      </button>
+
+    </div>
+
+    <h2 id="result"></h2>
 
   </div>
 
-  <div class="section-box">
+  <div id="loadingOverlay" class="loading-overlay">
 
-    <h2>Score Entry</h2>
+    <div class="loading-box">
 
-    <select id="competitor">
+      <div class="spinner"></div>
 
-      <option value="">
-        Select Competitor
-      </option>
+      <div>
+        Loading...
+        <br>
+        Please wait
+      </div>
 
-    </select>
-
-    <input
-      id="j1"
-      type="number"
-      step="0.1"
-      placeholder="Judge 1 Score"
-      oninput="updateTotal()">
-
-    <input
-      id="j2"
-      type="number"
-      step="0.1"
-      placeholder="Judge 2 Score"
-      oninput="updateTotal()">
-
-    <input
-      id="j3"
-      type="number"
-      step="0.1"
-      placeholder="Judge 3 Score"
-      oninput="updateTotal()">
-
-    <input
-      id="j4"
-      type="number"
-      step="0.1"
-      placeholder="Judge 4 Score"
-      oninput="updateTotal()">
-
-    <input
-      id="j5"
-      type="number"
-      step="0.1"
-      placeholder="Judge 5 Score"
-      oninput="updateTotal()">
-
-    <input
-      id="j6"
-      type="number"
-      step="0.1"
-      placeholder="Judge 6 Score"
-      oninput="updateTotal()">
-
-    <input
-      id="j7"
-      type="number"
-      step="0.1"
-      placeholder="Judge 7 Score"
-      oninput="updateTotal()">
-
-    <input
-      id="j8"
-      type="number"
-      step="0.1"
-      placeholder="Judge 8 Score"
-      oninput="updateTotal()">
-
-    <input
-      id="totalScore"
-      type="number"
-      step="0.1"
-      placeholder="Total Score (editable)">
-
-    <button onclick="saveScore()">
-      Save Score
-    </button>
+    </div>
 
   </div>
 
-  <h2 id="result"></h2>
+  <script src="judge.js"></script>
 
-</div>
+</body>
 
-<div id="loadingOverlay" class="loading-overlay">
-
-  <div class="loading-box">
-
-    <div class="spinner"></div>
-
-    <div>
-      Loading...
-      
+</html>
