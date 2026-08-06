@@ -1,9 +1,7 @@
-
 const API_URL =
   "https://script.google.com/macros/s/AKfycbzAbPL1C-vvuLQPPiLfV_6QJGu8uOH8e_fRLugrvdpvL0CsMyxHlYklBkOsmS_8H15n/exec";
 
-window.onload =
-  loadLeaderboard;
+window.onload = loadLeaderboard;
 
 async function loadLeaderboard() {
 
@@ -60,9 +58,7 @@ function renderLeaderboard(data) {
       <details class="sport-section">
 
         <summary class="sport-title">
-
           🏆 ${sport}
-
         </summary>
 
         <div class="level-grid">
@@ -94,17 +90,22 @@ function renderLeaderboard(data) {
 
       });
 
-      competitors.sort(function(a, b) {
+      const scoredCompetitors =
+        competitors.filter(function(c) {
 
-        return (
-          b.bestScore -
-          a.bestScore
-        );
+          return c.bestScore > 0;
+
+        });
+
+      scoredCompetitors.sort(function(a, b) {
+
+        return b.bestScore -
+               a.bestScore;
 
       });
 
       const top3 =
-        competitors.slice(0, 3);
+        scoredCompetitors.slice(0, 3);
 
       html += `
         <div class="level-box">
@@ -116,7 +117,7 @@ function renderLeaderboard(data) {
 
         html += `
           <div class="row">
-            No scores yet
+            <span>No scores yet</span>
           </div>
         `;
 
@@ -126,29 +127,27 @@ function renderLeaderboard(data) {
 
           let medal = "";
 
-          if (index === 0)
+          if (index === 0) {
             medal = "🥇";
+          }
 
-          if (index === 1)
+          if (index === 1) {
             medal = "🥈";
+          }
 
-          if (index === 2)
+          if (index === 2) {
             medal = "🥉";
+          }
 
           html += `
             <div class="row">
 
               <span class="name">
-
-                ${medal}
-                ${c[1]}
-
+                ${medal} ${c[1]}
               </span>
 
               <span class="score">
-
                 ${c.bestScore}
-
               </span>
 
             </div>
@@ -175,6 +174,8 @@ function renderLeaderboard(data) {
   });
 
 }
+
+/* Refresh leaderboard every 30 seconds */
 
 setInterval(
   loadLeaderboard,
