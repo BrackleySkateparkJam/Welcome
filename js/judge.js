@@ -1,6 +1,20 @@
 const API_URL =
   "https://script.google.com/macros/s/AKfycbzAbPL1C-vvuLQPPiLfV_6QJGu8uOH8e_fRLugrvdpvL0CsMyxHlYklBkOsmS_8H15n/exec";
+const JUDGE_KEY =
+  new URLSearchParams(
+    window.location.search
+  ).get("judgeKey");
 
+if (!JUDGE_KEY) {
+
+  document.body.innerHTML =
+    "<h1 style='font-family:Arial;text-align:center;margin-top:50px;'>Unauthorised</h1>";
+
+  throw new Error(
+    "Missing judge key."
+  );
+
+}
 let competitors = [];
 
 async function loadCompetitors() {
@@ -29,14 +43,16 @@ async function loadCompetitors() {
 
     const response =
       await fetch(
-        API_URL +
-        "?action=competitors" +
-        "&discipline=" +
-        encodeURIComponent(discipline) +
-        "&level=" +
-        encodeURIComponent(level) +
-        "&run=" +
-        encodeURIComponent(run)
+API_URL +
+"?action=competitors" +
+"&judgeKey=" +
+encodeURIComponent(JUDGE_KEY) +
+"&discipline=" +
+encodeURIComponent(discipline) +
+"&level=" +
+encodeURIComponent(level) +
+"&run=" +
+encodeURIComponent(run)
       );
 
     const data =
@@ -197,42 +213,46 @@ async function saveScore() {
 
   try {
 
-    const params =
-      new URLSearchParams({
+   const params =
+  new URLSearchParams({
 
-        action: "saveScore",
+    action: "saveScore",
 
-        competitorNo:
-          competitor.no,
+    judgeKey:
+      JUDGE_KEY,
 
-        competitorName:
-          competitor.name,
+    competitorNo:
+      competitor.no,
 
-        discipline:
-          document.getElementById(
-            "discipline"
-          ).value,
+    competitorName:
+      competitor.name,
 
-        level:
-          document.getElementById(
-            "level"
-          ).value,
+    discipline:
+      document.getElementById(
+        "discipline"
+      ).value,
 
-        run:
-          run,
+    level:
+      document.getElementById(
+        "level"
+      ).value,
 
-        judge1: scores[0],
-        judge2: scores[1],
-        judge3: scores[2],
-        judge4: scores[3],
-        judge5: scores[4],
+    run:
+      run,
 
-        comment: comment,
+    judge1: scores[0],
+    judge2: scores[1],
+    judge3: scores[2],
+    judge4: scores[3],
+    judge5: scores[4],
 
-        totalScore:
-          totalScore
+    comment:
+      comment,
 
-      });
+    totalScore:
+      totalScore
+
+  });
 
     const response =
       await fetch(
