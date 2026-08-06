@@ -1,1 +1,112 @@
 
+body {
+
+  margin: 0;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  background: #f5f5f5;
+
+}
+
+.container {
+
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding: 20px;
+
+}
+
+h1 {
+
+  text-align: center;
+
+  margin-bottom: 30px;
+
+}
+
+.sport-section {
+
+  margin-bottom: 20px;
+
+}
+
+.sport-title {
+
+  font-size: 24px;
+
+  font-weight: bold;
+
+  padding: 15px;
+
+  background: #222;
+
+  color: white;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+}
+
+.level-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(300px, 1fr)
+    );
+
+  gap: 15px;
+
+  margin-top: 15px;
+
+}
+
+.level-box {
+
+  background: white;
+
+  border-radius: 10px;
+
+  padding: 15px;
+
+  box-shadow:
+    0 2px 5px
+    rgba(
+      0,
+      0,
+      0,
+      0.1
+    );
+
+}
+
+.level-box h3 {
+
+  margin-top: 0;
+
+}
+
+.row {
+
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  padding: 8px 0;
+
+}
+
+.score {
+
+  font-weight: bold;
+
+}
