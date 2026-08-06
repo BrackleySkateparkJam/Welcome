@@ -15,55 +15,64 @@
 
   <link
     rel="stylesheet"
-    href="Leaderboard.css">
+    href="css\Leaderboard.css">
 
 </head>
 
 <body>
 
-  <div class="page-container">
+  <div class="container">
 
-    <header class="hero">
+    <div class="header">
 
       <h1>
         🏆 Brackley Skatepark Jam 2026
       </h1>
 
       <p>
-        Live Leaderboard
+        Live Competition Results
       </p>
 
-    </header>
+    </div>
 
-    <section class="info-bar">
+    <div class="refresh-info">
 
-      <div class="last-updated">
+      Auto refresh every 30 seconds
 
-        Updates every 30 seconds
+    </div>
 
-      </div>
+    <div
+      id="leaderboard">
 
-    </section>
+      <div class="loading">
 
-    <main>
-
-      <div
-        id="leaderboard"
-        class="leaderboard-container">
-
-        <div class="loading">
-
-          Loading leaderboard...
-
-        </div>
+        Loading leaderboard...
 
       </div>
 
-    </main>
+    </div>
 
   </div>
 
-  Leaderboard.js"></script>
+  <div
+    id="loadingOverlay"
+    class="loading-overlay">
+
+    <div class="loading-box">
+
+      <div class="spinner"></div>
+
+      <div>
+
+        Loading Results...
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>js\leaderboard.js</script>
 
 </body>
 
