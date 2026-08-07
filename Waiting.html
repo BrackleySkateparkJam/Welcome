@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Waiting Competitors</title>
+
+  ">
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Waiting Competitors</h1>
+
+    <div class="section-box">
+
+      <h2>Competition Filter</h2>
+
+      <select id="discipline">
+
+        <option value="">
+          Choose Sport
+        </option>
+
+        <option value="Skateboard">
+          Skateboard
+        </option>
+
+        <option value="Scooter">
+          Scooter
+        </option>
+
+        <option value="BMX">
+          BMX
+        </option>
+
+      </select>
+
+      <select id="level">
+
+        <option value="">
+          Choose Level
+        </option>
+
+        <option value="Beginner">
+          Beginner
+        </option>
+
+        <option value="Intermediate">
+          Intermediate
+        </option>
+
+        <option value="Advanced">
+          Advanced
+        </option>
+
+      </select>
+
+      <select id="run">
+
+        <option value="Run1">
+          Run 1
+        </option>
+
+        <option value="Run2">
+          Run 2
+        </option>
+
+      </select>
+
+      <button onclick="loadWaitingCompetitors()">
+        Load Competitors
+      </button>
+
+    </div>
+
+    <div class="section-box">
+
+      <h2>Still To Run</h2>
+
+      <div id="competitorList">
+        Select filters and click Load Competitors
+      </div>
+
+    </div>
+
+  </div>
+
+  js/waiting.js
+
+</body>
+
+</html>
