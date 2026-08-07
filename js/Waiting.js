@@ -48,6 +48,10 @@ async function loadWaitingCompetitors() {
 
 async function refreshList() {
 
+  document.getElementById(
+    "loadingOverlay"
+  ).style.display = "flex";
+
   try {
 
     const response =
@@ -66,10 +70,12 @@ async function refreshList() {
 
     const competitors =
       await response.json();
-document.getElementById(
-  "waitingTitle"
-).textContent =
-  `Still To Run (${competitors.length})`;
+
+    document.getElementById(
+      "waitingTitle"
+    ).textContent =
+      `Still To Run (${competitors.length})`;
+
     const container =
       document.getElementById(
         "competitorList"
@@ -86,6 +92,40 @@ document.getElementById(
       return;
 
     }
+
+    container.innerHTML = "";
+
+    competitors.forEach(function(c, index) {
+
+      container.innerHTML += `
+        <div class="competitor-row">
+
+          <span>
+            ${index + 1}. ${c.name}
+          </span>
+
+          <span>
+            #${c.no}
+          </span>
+
+        </div>
+      `;
+
+    });
+
+  } catch (error) {
+
+    console.log(error);
+
+  } finally {
+
+    document.getElementById(
+      "loadingOverlay"
+    ).style.display = "none";
+
+  }
+
+}
 
     container.innerHTML = "";
 
