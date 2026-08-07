@@ -23,6 +23,10 @@ let currentRun = "";
 
 async function loadWaitingCompetitors() {
 
+  document.getElementById(
+    "loadingOverlay"
+  ).style.display = "flex";
+
   currentSport =
     document.getElementById("discipline").value;
 
@@ -33,6 +37,10 @@ async function loadWaitingCompetitors() {
     document.getElementById("run").value;
 
   if (!currentSport || !currentLevel) {
+
+    document.getElementById(
+      "loadingOverlay"
+    ).style.display = "none";
 
     alert(
       "Select sport and level first."
