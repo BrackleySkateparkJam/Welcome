@@ -126,4 +126,4 @@ setInterval(function() {
 
   }
 
-}, 30000);
+}, 15000);
