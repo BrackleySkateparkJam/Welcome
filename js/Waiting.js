@@ -56,9 +56,7 @@ async function loadWaitingCompetitors() {
 
 async function refreshList() {
 
-  document.getElementById(
-    "loadingOverlay"
-  ).style.display = "flex";
+
 
   try {
 
@@ -125,13 +123,7 @@ async function refreshList() {
 
     console.log(error);
 
-  } finally {
-
-    document.getElementById(
-      "loadingOverlay"
-    ).style.display = "none";
-
-  }
+  } 
 
 }
 
