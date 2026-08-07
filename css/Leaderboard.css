@@ -64,10 +64,10 @@ body {
 
 .sport-title {
   cursor: pointer;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
-  background: #0b1220;
-  color: #ffffff;
+  background:#ffffff;
+  color: #1976D2;
   padding: 18px 20px;
   border-radius: 12px;
   list-style: none;
