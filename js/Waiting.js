@@ -127,33 +127,7 @@ async function refreshList() {
 
 }
 
-    container.innerHTML = "";
 
-    competitors.forEach(function(c, index) {
-
-      container.innerHTML += `
-        <div class="competitor-row">
-
-          <span>
-            ${index + 1}. ${c.name}
-          </span>
-
-          <span>
-            #${c.no}
-          </span>
-
-        </div>
-      `;
-
-    });
-
-  } catch (error) {
-
-    console.log(error);
-
-  }
-
-}
 
 /* Auto refresh every 30 seconds */
 
