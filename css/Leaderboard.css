@@ -151,11 +151,14 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-
+  body {
+    background: red;
+  }
 
   .level-grid {
     grid-template-columns: 1fr;
   }
+}
 
 
   
