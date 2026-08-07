@@ -98,6 +98,7 @@ body {
   display: grid;
 
   grid-template-columns: repeat(3, 1fr);
+    grid-template-columns:repeat(3, 1fr);
   gap: 16px;
   margin-top: 16px;
 }
@@ -150,6 +151,14 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+
+
+  .level-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  
 
   .container {
     padding: 12px;
