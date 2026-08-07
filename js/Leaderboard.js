@@ -5,6 +5,9 @@ window.onload = loadLeaderboard;
 
 async function loadLeaderboard() {
 
+  const openSports = [...document.querySelectorAll('.sport-section[open]')]
+    .map(el => el.dataset.sport);
+
   try {
 
     const response =
@@ -16,7 +19,7 @@ async function loadLeaderboard() {
     const data =
       await response.json();
 
-    renderLeaderboard(data);
+    renderLeaderboard(data, openSports);
 
   } catch (error) {
 
@@ -31,7 +34,7 @@ async function loadLeaderboard() {
 
 }
 
-function renderLeaderboard(data) {
+function renderLeaderboard(data, openSports = []) {
 
   const container =
     document.getElementById(
@@ -54,15 +57,22 @@ function renderLeaderboard(data) {
 
   sports.forEach(function(sport) {
 
-    let html = `
-      <details class="sport-section">
+const isOpen =
+  openSports.includes(sport);
 
-        <summary class="sport-title">
-          🏆 ${sport}
-        </summary>
+let html = `
+  <details
+    class="sport-section"
+    data-sport="${sport}"
+    ${isOpen ? "open" : ""}
+  >
 
-        <div class="level-grid">
-    `;
+    <summary class="sport-title">
+      🏆 ${sport}
+    </summary>
+
+    <div class="level-grid">
+`;
 
     levels.forEach(function(level) {
 
