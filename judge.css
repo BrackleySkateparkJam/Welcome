@@ -26,6 +26,7 @@ h1{
 
 select,
 input,
+textarea,
 button{
   width:100%;
   padding:15px;
@@ -35,6 +36,7 @@ button{
 }
 
 input,
+textarea,
 select{
   border:1px solid #ccc;
 }
