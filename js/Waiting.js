@@ -52,52 +52,11 @@ async function loadWaitingCompetitors() {
 
   await refreshList();
 
+  document.getElementById(
+    "loadingOverlay"
+  ).style.display = "none";
+
 }
-
-async function refreshList() {
-
-
-
-  try {
-
-    const response =
-      await fetch(
-        API_URL +
-        "?action=competitors" +
-        "&judgeKey=" +
-        encodeURIComponent(JUDGE_KEY) +
-        "&discipline=" +
-        encodeURIComponent(currentSport) +
-        "&level=" +
-        encodeURIComponent(currentLevel) +
-        "&run=" +
-        encodeURIComponent(currentRun)
-      );
-
-    const competitors =
-      await response.json();
-
-    document.getElementById(
-      "waitingTitle"
-    ).textContent =
-      `Still To Run (${competitors.length})`;
-
-    const container =
-      document.getElementById(
-        "competitorList"
-      );
-
-    if (
-      !competitors ||
-      competitors.length === 0
-    ) {
-
-      container.innerHTML =
-        '<div class="empty">No competitors remaining.</div>';
-
-      return;
-
-    }
 
     container.innerHTML = "";
 
