@@ -55,7 +55,7 @@ function renderLeaderboard(data) {
   sports.forEach(function(sport) {
 
     let html = `
-      <details class="sport-section" open>
+      <details class="sport-section" closed>
 
         <summary class="sport-title">
           🏆 ${sport}
