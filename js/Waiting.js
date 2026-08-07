@@ -66,7 +66,10 @@ async function refreshList() {
 
     const competitors =
       await response.json();
-
+document.getElementById(
+  "waitingTitle"
+).textContent =
+  `Still To Run (${competitors.length})`;
     const container =
       document.getElementById(
         "competitorList"
